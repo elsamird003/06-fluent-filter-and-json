@@ -10,10 +10,11 @@ export class FluentBusinesses {
   getData(): Business[] {
     return this.data;
   }
-
   fromCityInState(city: string, state: string): FluentBusinesses {
-    return this;
+    const filteredData = this.data.filter(business => business.city === city && business.state === state);
+    return new FluentBusinesses(filteredData);
   }
+  
 
   hasStarsGeq(stars: number): FluentBusinesses {
     // TODO
