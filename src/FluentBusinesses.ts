@@ -73,6 +73,15 @@ export class FluentBusinesses {
     }
   mostReviews(): Business | undefined {
     // TODO
+
+    //const filteredBusinesses = this.data.filter(
+      //(Business) => Business.city === city && Business.state === state
+    //);
+    //return new FluentBusinesses(filteredBusinesses);
+      if(this.data.filter((Business) => Business.name === Business.attributes)){
+        return new this.mostReviews
+        
+      }
     return undefined;
   }
 
