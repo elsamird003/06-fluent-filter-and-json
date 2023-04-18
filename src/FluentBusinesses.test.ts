@@ -52,7 +52,7 @@ describe("bestPlace", () => {
   it("break tie with review count", () => {
     const best = new FluentBusinesses(testData).fromCityInState("Charlotte", "NC").bestPlace();
 
-    assert(best);
+   assert(best);
     assert(best.name === "China Garden");
   });
 });
