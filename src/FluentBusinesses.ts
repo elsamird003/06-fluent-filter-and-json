@@ -33,17 +33,17 @@ export class FluentBusinesses {
     //const filteredBusinesses = this.data.filter((Business) => Business.stars! >= stars);
     //return new FluentBusinesses(filteredBusinesses);
   
-  filterbyCategory <Business,key extends keyof Business>(data:Business[],field:key,value:Business[key]):Business[]{
+  filterbyField <Business,key extends keyof Business>(data:Business[],field:key,value:Business[key]):Business[]{
   return data.filter(data => data[field]  === value);
-
   }
+   
+  //const ctg = this.data.filter( (Business) => Business.categories!.includes(category)  ); 
   inCategory(category: string): FluentBusinesses {
-
-    //const ctg = this.data.filter( (Business) => Business.categories!.includes(category)  ); 
-
-
-      const  ff   =  this.data(FluentBusinesses).filter(Business) => business.categories
-  return new FluentBusinesses(filteredBusinesses);
+  const filterCategory = this.filterbyField(this.data,"categories",[category]);
+    return new FluentBusinesses(filterCategory);
+     
+      //const  ff   =  this.data(FluentBusinesses).filter(Business) => business.categories
+  //return new FluentBusinesses(filteredBusinesses);
 }
 
 
