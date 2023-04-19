@@ -37,31 +37,34 @@ export class FluentBusinesses {
   inCategory(category: string): FluentBusinesses {
   const filterCategory = this.data.filter((Bussiness) => Bussiness.categories!.includes(category));
     return new FluentBusinesses(filterCategory);
-     
+    
+} 
 
-
-      //const  ff   =  this.data(FluentBusinesses).filter(Business) => business.categories
-  //return new FluentBusinesses(filteredBusinesses);
-}
+  //function done to mee:))
   hasHoursOnDays(days: string[]): FluentBusinesses {
       const filteredBusinesses = this.data.filter((business) => {
         //Check if the business has hours on all specified days
         return days.every((day) =>business.hours!.hasOwnProperty(day));
       });
-  
       // Return a new FluentBusinesses instance with the filtered businesses
       return new FluentBusinesses(filteredBusinesses);
-    // TODO
+ 
   }
-
+    
   hasAmbience(ambience: string): FluentBusinesses {
-    // TODO
-    return this;
-  }
+   
+      const filteredBusinesses = this.data.filter((business) => {
+        const ambienceAttributes = business.attributes?.Ambience;
+        return ambienceAttributes && ambienceAttributes[ambience] === true;
+      });
+      return new FluentBusinesses(filteredBusinesses);
+    }
+
+  
    
   // use the starts and review_count fields.
 
-
+  // This func seems done to me 
   bestPlace(): Business | undefined {
 
     if (this.data.length === 0) {
@@ -70,18 +73,19 @@ export class FluentBusinesses {
 
     let bestBusiness: Business = this.data[0];
 
-    for (const business of this.data) {
-      if (
-        business.stars! > business.stars! ||
-        (business.stars === bestBusiness.stars &&
-          business.review_count! > bestBusiness.review_count!)
-      ) {
-        bestBusiness = business;
+    return this.data.reduce((bestBusiness, currentBusiness) => {
+      if (currentBusiness.stars! > bestBusiness.stars!) {
+        return currentBusiness;
+      } else if (currentBusiness.stars === bestBusiness.stars) {
+        return currentBusiness.review_count! > bestBusiness.review_count!
+          ? currentBusiness
+          : bestBusiness;
+      } else {
+        return bestBusiness;
       }
-    }
-
-    return bestBusiness;
+    });
   }
+  
 
 
     // TODO    
