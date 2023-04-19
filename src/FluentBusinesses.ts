@@ -19,30 +19,27 @@ export class FluentBusinesses {
     );
     return new FluentBusinesses(filteredBusinesses);
   }
-
-  helper(stars:number){
-    const hj = stars;
-    return hj;
-  }
- 
+   // Maybe this func is all set.
   hasStarsGeq(stars: number): FluentBusinesses {
     const filteredBusinesses = this.data.filter(
       (Business) =>  Business.stars! >= stars
     );
     return new FluentBusinesses(filteredBusinesses);
   }
-    //const filteredBusinesses = this.data.filter((Business) => Business.stars! >= stars);
-    //return new FluentBusinesses(filteredBusinesses);
   
-  filterbyField <Business,key extends keyof Business>(data:Business[],field:key,value:Business[key]):Business[]{
+ filterbyField <Business,key extends keyof Business>(data:Business[],field:key,value:Business[key]):Business[]{
   return data.filter(data => data[field]  === value);
   }
-   
+
   //const ctg = this.data.filter( (Business) => Business.categories!.includes(category)  ); 
+
+  // function done to mee:))
   inCategory(category: string): FluentBusinesses {
-  const filterCategory = this.filterbyField(this.data,"categories",[category]);
+  const filterCategory = this.data.filter((Bussiness) => Bussiness.categories!.includes(category));
     return new FluentBusinesses(filterCategory);
      
+
+
       //const  ff   =  this.data(FluentBusinesses).filter(Business) => business.categories
   //return new FluentBusinesses(filteredBusinesses);
 }
@@ -75,9 +72,9 @@ export class FluentBusinesses {
 
     for (const business of this.data) {
       if (
-        this.data.stars! > this.data.stars! ||
+        business.stars! > business.stars! ||
         (business.stars === bestBusiness.stars &&
-          business.review_count > bestBusiness.review_count)
+          business.review_count! > bestBusiness.review_count!)
       ) {
         bestBusiness = business;
       }
@@ -86,11 +83,8 @@ export class FluentBusinesses {
     return bestBusiness;
   }
 
-}
-    // TODO
 
-
-    
+    // TODO    
   mostReviews(): Business | undefined {
     // TODO
 
@@ -106,3 +100,17 @@ export class FluentBusinesses {
   }
 
 
+}  
+
+type SortKey = "review_count" | "stars" | "category";
+
+function sortBy(businesses: Business[], keys: SortKey) {
+  // Sort `businesses` by the key specified by `key`.
+}
+
+sortBy([], "stars"); // OK
+// Compiler error
+
+function hasProperty(business: Business, key: keyof Business) {
+    return business[key] !== undefined;
+  }
