@@ -90,19 +90,21 @@ export class FluentBusinesses {
 
     // TODO    
   mostReviews(): Business | undefined {
-    // TODO
-
-    //const filteredBusinesses = this.data.filter(
-      //(Business) => Business.city === city && Business.state === state
-    //);
-    //return new FluentBusinesses(filteredBusinesses);
-    //  if(this.data.filter((Business) => Business.name === Business.attributes)){
-       // return new this.mostReviews;
-        
-      
-    return undefined;
-  }
-
+    if (this.data.length === 0) {
+      return undefined;
+    }
+      return this.data.reduce((mostReviewed, currentBusiness) => {
+        if (currentBusiness.review_count! > mostReviewed.review_count!) {
+          return currentBusiness;
+        } else if (currentBusiness.review_count === mostReviewed.review_count) {
+          return currentBusiness.stars! > mostReviewed.stars!
+            ? currentBusiness
+            : mostReviewed;
+        } else {
+          return mostReviewed;
+        }
+      });
+    }
 
 }  
 
